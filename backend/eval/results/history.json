@@ -1,0 +1,10 @@
+[
+  {
+    "version": "v1",
+    "date": "2026-10-17T09:00:33+00:00",
+    "detection_rate": 1.0,
+    "false_positive_rate": 0.0,
+    "naive_attack_success": 0.067,
+    "protected_attack_success": 0.0
+  }
+]

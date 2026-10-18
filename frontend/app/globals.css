@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+/* HiddenInk visual identity: "invisible ink under UV light". */
+
+@theme {
+  /* Ink: indigo-navy for text, dark surfaces and the primary accent. */
+  --color-ink-950: #0b0b1f;
+  --color-ink-900: #14143a;
+  --color-ink-700: #3730a3;
+  --color-ink-600: #4f46e5;
+  --color-ink-500: #6366f1;
+  --color-ink-100: #e0e7ff;
+  --color-ink-50: #eef2ff;
+
+  /* UV: the violet glow, and a cyan highlight. */
+  --color-uv-500: #8b5cf6;
+  --color-uv-400: #a78bfa;
+  /* Darker violets for text and for white text on violet (uv-500 is under 4.5:1 on white). */
+  --color-uv-600: #7c3aed;
+  --color-uv-700: #6d28d9;
+  --color-glow-400: #22d3ee;
+
+  /* Verdicts. */
+  --color-verdict-clean: #10b981;      /* emerald-500 */
+  --color-verdict-suspicious: #f59e0b; /* amber-500 */
+  --color-verdict-poisoned: #e11d48;   /* rose-600 */
+
+  /* Fonts come from next/font in app/layout.tsx. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Animations, available as animate-fade-up, animate-shimmer, animate-pulse-glow, animate-scan-beam, animate-float. */
+  --animate-fade-up: fade-up 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-scan-beam: scan-beam 2.2s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  /* Slow background blobs on the login hero. */
+  --animate-drift-1: drift-1 19s ease-in-out infinite alternate;
+  --animate-drift-2: drift-2 23s ease-in-out infinite alternate;
+  --animate-drift-3: drift-3 16s ease-in-out infinite alternate;
+  /* Feedback: Red-Team results, toasts and highlighted page boxes. */
+  --animate-shake: shake 450ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  --animate-burst: burst 700ms ease-out both;
+  --animate-pop: pop 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-slide-in: slide-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-box-pulse: box-pulse 1.8s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.45); }
+    50% { opacity: 0.75; box-shadow: 0 0 0 4px rgba(225, 29, 72, 0); }
+  }
+  @keyframes scan-beam {
+    0% { transform: translateY(-100%); opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes shake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(3px); }
+    30%, 50%, 70% { transform: translateX(-6px); }
+    40%, 60% { transform: translateX(6px); }
+  }
+  @keyframes burst {
+    from { transform: scale(0.4); opacity: 0.9; }
+    to { transform: scale(2.4); opacity: 0; }
+  }
+  @keyframes pop {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes slide-in {
+    from { transform: translateX(24px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes box-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.55); }
+    50% { box-shadow: 0 0 0 5px rgba(139, 92, 246, 0); }
+  }
+  @keyframes drift-1 {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(18%, 12%) scale(1.15); }
+  }
+  @keyframes drift-2 {
+    from { transform: translate(0, 0) scale(1.1); }
+    to { transform: translate(-16%, -10%) scale(0.95); }
+  }
+  @keyframes drift-3 {
+    from { transform: translate(0, 0) scale(0.9); }
+    to { transform: translate(-10%, 14%) scale(1.1); }
+  }
+}
+
+:root { color-scheme: light; }
+
+body {
+  color: #111827;
+  background-color: #f7f7fb;
+  background-image: radial-gradient(ellipse 80% 420px at 50% -80px, rgba(139, 92, 246, 0.10), transparent 70%);
+  background-repeat: no-repeat;
+  font-family: var(--font-sans);
+}
+
+@layer base {
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  /* ---------- cards ---------- */
+  .card {
+    border-radius: 1rem;
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    background: #fff;
+    padding: 1.25rem;
+    box-shadow: 0 1px 2px rgba(20, 20, 58, 0.04), 0 4px 16px -6px rgba(20, 20, 58, 0.08);
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(139, 92, 246, 0.22);
+    box-shadow: 0 2px 4px rgba(20, 20, 58, 0.05), 0 12px 28px -10px rgba(139, 92, 246, 0.28);
+  }
+
+  /* ---------- buttons ---------- */
+  .btn, .btn-primary, .btn-secondary, .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    transition: box-shadow 200ms ease, transform 120ms ease, background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+  }
+  .btn-primary {
+    color: #fff;
+    background-image: linear-gradient(135deg, var(--color-uv-600), var(--color-ink-600));
+    box-shadow: 0 1px 2px rgba(79, 70, 229, 0.25);
+  }
+  .btn-primary:hover:not(:disabled) { box-shadow: 0 6px 20px -6px rgba(139, 92, 246, 0.6); }
+  .btn-primary:active:not(:disabled) { transform: scale(0.97); }
+
+  /* .btn-ghost is the older name for the secondary style. */
+  .btn-secondary, .btn-ghost {
+    color: var(--color-uv-600);
+    background: #fff;
+    border: 1px solid rgba(79, 70, 229, 0.28);
+  }
+  .btn-secondary:hover:not(:disabled), .btn-ghost:hover:not(:disabled) {
+    background: rgba(139, 92, 246, 0.07);
+    border-color: rgba(139, 92, 246, 0.45);
+  }
+  .btn-secondary:active:not(:disabled), .btn-ghost:active:not(:disabled) { transform: scale(0.98); }
+
+  .btn:disabled, .btn-primary:disabled, .btn-secondary:disabled, .btn-ghost:disabled { cursor: not-allowed; opacity: 0.5; }
+  .btn:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible, .btn-ghost:focus-visible {
+    outline: 2px solid var(--color-uv-400);
+    outline-offset: 2px;
+  }
+
+  /* ---------- form fields ---------- */
+  .input {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    outline: none;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .input:focus {
+    border-color: var(--color-uv-400);
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.35), 0 0 16px -2px rgba(139, 92, 246, 0.35);
+  }
+  /* Chrome autofill: keep the white field and normal text instead of its blue tint. */
+  .input:-webkit-autofill, .input:-webkit-autofill:hover {
+    -webkit-text-fill-color: #111827;
+    caret-color: #111827;
+    -webkit-box-shadow: 0 0 0 1000px #fff inset;
+    box-shadow: 0 0 0 1000px #fff inset;
+    transition: background-color 9999s ease-out 0s;
+  }
+  .input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #111827;
+    -webkit-box-shadow: 0 0 0 1000px #fff inset, 0 0 0 3px rgba(167, 139, 250, 0.35), 0 0 16px -2px rgba(139, 92, 246, 0.35);
+    box-shadow: 0 0 0 1000px #fff inset, 0 0 0 3px rgba(167, 139, 250, 0.35), 0 0 16px -2px rgba(139, 92, 246, 0.35);
+  }
+  .label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    color: #6b7280;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  /* ---------- verdict badges ---------- */
+  .badge-clean, .badge-suspicious, .badge-poisoned {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    padding: 0.125rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge-clean::before, .badge-suspicious::before, .badge-poisoned::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: currentColor;
+  }
+  .badge-clean { background: rgba(16, 185, 129, 0.12); color: #047857; }
+  .badge-clean::before { background: var(--color-verdict-clean); }
+  .badge-suspicious { background: rgba(245, 158, 11, 0.14); color: #b45309; }
+  .badge-suspicious::before { background: var(--color-verdict-suspicious); }
+  .badge-poisoned { background: rgba(225, 29, 72, 0.10); color: #be123c; }
+  .badge-poisoned::before { background: var(--color-verdict-poisoned); animation: var(--animate-pulse-glow); }
+
+  /* Hidden text, shown as "revealed ink". */
+  .revealed-ink {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.09), rgba(34, 211, 238, 0.06));
+    padding: 0.5rem 0.75rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: #5b21b6;
+  }
+
+  /* A primary button with a soft, steady violet glow (the Red-Team "Fire attack" button). */
+  .btn-glow { box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.25), 0 6px 22px -8px rgba(139, 92, 246, 0.7); }
+  .btn-glow:hover:not(:disabled) { box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.4), 0 10px 30px -8px rgba(139, 92, 246, 0.9); }
+
+  /* ---------- highlights and loading ---------- */
+  .gradient-text {
+    background-image: linear-gradient(90deg, var(--color-uv-500), var(--color-glow-400));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .skeleton {
+    border-radius: 1rem;
+    background-color: #f1f1f8;
+    background-image: linear-gradient(90deg, transparent 0%, rgba(167, 139, 250, 0.16) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+}
+
+/* Motion is decoration only: switch it all off for people who ask for less. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up, .animate-shimmer, .animate-pulse-glow, .animate-scan-beam, .animate-float,
+  .animate-drift-1, .animate-drift-2, .animate-drift-3,
+  .animate-shake, .animate-burst, .animate-pop, .animate-slide-in, .animate-box-pulse,
+  .skeleton, .badge-poisoned::before {
+    animation: none !important;
+  }
+  .card, .card:hover, .btn-primary:active, .btn-secondary:active, .btn-ghost:active {
+    transform: none !important;
+    transition: none !important;
+  }
+  /* Catch-all, including Tailwind's built-in animate-* classes and any hover or drag transition. */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

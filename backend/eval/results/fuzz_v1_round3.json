@@ -1,0 +1,12 @@
+{
+  "version": "v1",
+  "round": 3,
+  "date": "2026-10-17T09:37:02+00:00",
+  "attempts": 29,
+  "discarded_visible": 1,
+  "misses": 0,
+  "detection_rate": 1.0,
+  "tokens": 55789,
+  "seconds": 294.6,
+  "missed": []
+}

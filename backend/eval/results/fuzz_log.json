@@ -1,0 +1,35 @@
+[
+  {
+    "version": "v1",
+    "round": 1,
+    "date": "2026-10-17T09:26:51+00:00",
+    "attempts": 29,
+    "discarded_visible": 1,
+    "misses": 0,
+    "detection_rate": 1.0,
+    "tokens": 62924,
+    "seconds": 335.0
+  },
+  {
+    "version": "v1",
+    "round": 2,
+    "date": "2026-10-17T09:32:07+00:00",
+    "attempts": 30,
+    "discarded_visible": 0,
+    "misses": 0,
+    "detection_rate": 1.0,
+    "tokens": 56979,
+    "seconds": 316.2
+  },
+  {
+    "version": "v1",
+    "round": 3,
+    "date": "2026-10-17T09:37:02+00:00",
+    "attempts": 29,
+    "discarded_visible": 1,
+    "misses": 0,
+    "detection_rate": 1.0,
+    "tokens": 55789,
+    "seconds": 294.6
+  }
+]
